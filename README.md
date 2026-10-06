@@ -34,4 +34,6 @@ source ~/ros2_ws/install/setup.bash
 ``` r
 ros2 launch gem_ycs_weatherstation weather_system.launch.py
 ```
+Graphs:
 
+<img width="4414" height="665" alt="Weather Station Flow-2026-10-06-215916" src="https://github.com/user-attachments/assets/06fbabd8-5c39-4f83-a96d-92104125723b" />
