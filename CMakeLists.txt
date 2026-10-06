@@ -20,19 +20,24 @@ rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Weather.msg"
 )
 
+ament_export_dependencies(rosidl_default_runtime)
+
 set(ament_dependencies
   rclcpp
   std_msgs
 )
 
-# add_executable(simple_sub_node src/print_pose.cpp)
-# ament_target_dependencies(simple_sub_node ${ament_dependencies} )
+add_executable(weather_station_node src/weather_station_node.cpp)
+ament_target_dependencies(weather_station_node ${ament_dependencies})
+
+rosidl_target_interfaces(weather_station_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 install(DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
-# simple_sub_node
+  weather_station_node
 DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
