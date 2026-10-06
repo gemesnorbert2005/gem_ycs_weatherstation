@@ -14,20 +14,35 @@ public:
             std::bind(&ComfortIndexSolverNode::callback, this, std::placeholders::_1)
         );
     }
+
 private:
     void callback(const gem_ycs_weatherstation::msg::Weather::SharedPtr msg)
     {
+        // RCLCPP_INFO(
+        //     this->get_logger(),
+        //                msg->temperature,
+        //     msg->humidity,
+        //     msg->pressure
+        // );
+
+        float comfort_index =
+            msg->temperature -
+            (0.55f - 0.0055f * msg->humidity) * (msg->temperature - 14.5f);
+
         RCLCPP_INFO(
             this->get_logger(),
-            "Received Weather: temp=%.2f °C, humidity=%.2f %%, pressure=%.2f hPa",
-            msg->temperature,
-            msg->humidity,
-            msg->pressure
+            "Comfort Index: %.2f",
+            comfort_index
         );
     }
 
-    // "comfort index" számítása
+    rclcpp::Subscription<gem_ycs_weatherstation::msg::Weather>::SharedPtr subscription_;
+};
 
-    float comfort_index = msg->temperature - (0.55f - 0.0055f)
-
+int main(int argc, char * argv[])
+{
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<ComfortIndexSolverNode>());
+    rclcpp::shutdown();
+    return 0;
 }

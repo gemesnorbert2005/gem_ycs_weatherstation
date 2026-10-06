@@ -33,11 +33,19 @@ ament_target_dependencies(weather_station_node ${ament_dependencies})
 rosidl_target_interfaces(weather_station_node
   ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
-install(DIRECTORY launch
+add_executable(comfort_index_solver_node src/comfort_index_solver_node.cpp)
+ament_target_dependencies(comfort_index_solver_node ${ament_dependencies})
+
+rosidl_target_interfaces(comfort_index_solver_node
+  ${PROJECT_NAME} "rosidl_typesupport_cpp")
+
+install(
+  DIRECTORY launch
   DESTINATION share/${PROJECT_NAME})
 
 install(TARGETS
   weather_station_node
+  comfort_index_solver_node
 DESTINATION lib/${PROJECT_NAME})
 
 ament_package()
