@@ -25,7 +25,7 @@ def generate_launch_description():
             ]
         ),
         # Node(
-        #     package='ros2_cpp_template',
+        #     package='gem_ycs_weatherstation',
         #     executable='simple_sub_node',
         #     output='screen',
         # ),

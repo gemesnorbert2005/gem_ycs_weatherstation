@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(ros2_cpp_template)
+project(gem_ycs_weatherstation)
 
 # Default to C++14
 if(NOT CMAKE_CXX_STANDARD)
@@ -13,12 +13,16 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(geometry_msgs REQUIRED)
+
+find_package(rosidl_default_generators REQUIRED)
+
+rosidl_generate_interfaces(${PROJECT_NAME}
+  "msg/Weather.msg"
+)
 
 set(ament_dependencies
   rclcpp
   std_msgs
-  geometry_msgs
 )
 
 # add_executable(simple_sub_node src/print_pose.cpp)
